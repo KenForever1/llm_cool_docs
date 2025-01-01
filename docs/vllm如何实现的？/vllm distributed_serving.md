@@ -24,7 +24,7 @@ https://docs.vllm.ai/en/latest/serving/distributed_serving.html
 vLLM支持分布式张量并行和流水线并行推理和服务。目前，我们支持[Megatron-LM](https://arxiv.org/pdf/1909.08053)的张量并行算法。我们使用Ray或python原生多进程的方式（multiprocessing库）来管理分布式运行时。在单个节点上部署时可以使用多进程的方式，多节点推理目前需要Ray。
 
 在源码目录中可以看到：
-```
+```bash
 $ ls vllm/executor/ -1
 cpu_executor.py
 distributed_gpu_executor.py
@@ -41,7 +41,7 @@ ray_utils.py
 默认情况下，当不在Ray集群中运行时，如果同一节点上有足够的GPU可用于配置的tensor_paralle_size，则将使用多进程，否则将使用Ray。此默认值可以通过LLM类distributed-executor-backend参数或--distributed-executor-backend API服务器参数覆盖。将其设置为mp以采用多进程，或设置为ray以采用ray。对于多进程的方式，不需要安装Ray。
 
 要使用LLM运行多GPU推理，需要将tensor_paralle_size参数设置为要使用的GPU数量。例如，要在4个GPU上运行推理：
-```
+```python
 from vllm import LLM
 llm = LLM("facebook/opt-13b", tensor_parallel_size=4)
 output = llm.generate("San Franciso is a")
@@ -49,14 +49,14 @@ output = llm.generate("San Franciso is a")
 
 要运行多GPU服务，需要在启动服务器时传入--tensor并行大小参数。例如，要在4个GPU上运行API服务器：
 
-```
+```bash
 $ vllm serve facebook/opt-13b \
 $     --tensor-parallel-size 4
 ```
 
 您还可以额外指定--pipeline并行大小以启用流水线并行性。例如，要在具有流水线并行性和张量并行性的8个GPU上运行API服务器：
 
-```
+```bash
 $ vllm serve gpt2 \
 $     --tensor-parallel-size 4 \
 $     --pipeline-parallel-size 2
@@ -69,7 +69,7 @@ $     --pipeline-parallel-size 2
 第一步是启动容器并将其组织成集群。我们提供了一个帮助脚本来启动集群。请注意，此脚本在启动docker时没有管理权限，而在运行分析和跟踪工具时，访问GPU性能计数器需要管理权限。为此，脚本可以通过使用docker run命令中的--CAP-add选项将CAP_SYS_ADMIN发送到docker容器。
 
 选择一个节点作为头节点，并运行以下命令：
-```
+```bash
 
 $ bash run_cluster.sh \
 $                   vllm/vllm-openai \
@@ -79,7 +79,7 @@ $                   /path/to/the/huggingface/home/in/this/node
 ```
 
 在其余的工作节点上，运行以下命令：
-```
+```bash
 
 $ bash run_cluster.sh \
 $                   vllm/vllm-openai \
@@ -94,7 +94,7 @@ $                   /path/to/the/huggingface/home/in/this/node
 
 之后，在任何节点上，您都可以像往常一样使用vLLM，就像您在一个节点上拥有所有GPU一样。常见的做法是将张量并行大小设置为每个节点中的GPU数量，将流水线并行大小设置成节点数量。例如，如果您在2个节点中有16个GPU（每个节点8GPU），则可以将张量并行大小设置为8，管道并行大小设为2：
 
-```
+```bash
 $ vllm serve /path/to/the/model/in/the/container \
 $     --tensor-parallel-size 8 \
 $     --pipeline-parallel-size 2
@@ -102,7 +102,7 @@ $     --pipeline-parallel-size 2
 
 您还可以在不使用流水线并行的情况下使用张量并行，只需将张量并行大小设置为集群中的GPU数量即可。例如，如果在2个节点中有16个GPU（每个节点8GPU），则可以将张量并行大小设置为16：
 
-```
+```bash
 $ vllm serve /path/to/the/model/in/the/container \
 $     --tensor-parallel-size 16
 ```
