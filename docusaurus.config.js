@@ -162,6 +162,17 @@ const config = {
         additionalLanguages: ['cpp','rust'],
       },
     }),
+    plugins: [
+    [
+      "@cmfcmf/docusaurus-search-local",
+      {
+        // Options here
+	// language of your documentation, see next section
+        language: ["zh", "en"],
+      },
+    ],
+  ],
 };
 
 export default config;
+
