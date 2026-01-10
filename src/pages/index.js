@@ -15,14 +15,21 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        {/* <p className="hero__subtitle">{siteConfig.tagline}</p>
+        {/* <p className="hero__subtitle"> */}
+        <p>
+          学无止境，看到有趣的东西会记录下来，备忘、分享。
+        </p>
+        <p>
+          锻炼身体很重要，平时会去游泳🏊、打打球🎾，户外活动🏝️。
+        </p>
+       
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            🐚 Start form here 🦖
           </Link>
-        </div> */}
+        </div>
       </div>
     </header>
   );
@@ -38,6 +45,9 @@ export default function Home() {
       <main>
         <HomepageFeatures />
       </main>
+      <p className="hero__subtitle" style={{ textAlign: "center" }}>
+        🏆🏅 It's what you do right now that makes a difference. 🏆🏅
+      </p>
     </Layout>
   );
 }
