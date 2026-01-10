@@ -37,6 +37,11 @@ const config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   presets: [
     [
       'classic',
@@ -104,11 +109,21 @@ const config = {
             label: 'LLM大模型推理',
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
-          // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
+          {
+            href: 'https://kenforever1.github.io/blog',
+            label: 'Blog',
+            position: 'left'
+          },
+          {
+            href: 'https://github.com/KenForever1',
+            label: 'GitHub',
+            position: 'right',
+          },
+          {
+            label: '知乎',
+            href: 'https://www.zhihu.com/people/steveforever',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -140,26 +155,30 @@ const config = {
           //     },
           //   ],
           // },
-          // {
-          //   title: 'More',
-          //   items: [
-          //     {
-          //       label: 'Blog',
-          //       to: '/blog',
-          //     },
-          //     {
-          //       label: 'GitHub',
-          //       href: 'https://github.com/facebook/docusaurus',
-          //     },
-          //   ],
-          // },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                href: 'https://kenforever1.github.io/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/KenForever1',
+              },
+              {
+                label: '知乎',
+                href: 'https://www.zhihu.com/people/steveforever',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} llm_cool_docs, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['cpp','rust'],
+        additionalLanguages: ['cpp','rust', 'python'],
       },
     }),
     plugins: [

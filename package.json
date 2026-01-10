@@ -17,6 +17,7 @@
     "@cmfcmf/docusaurus-search-local": "^2.0.1",
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "@node-rs/jieba": "^2.0.1",
     "baseline-browser-mapping": "^2.9.13",
